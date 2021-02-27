@@ -2,7 +2,6 @@
 from collections import deque, defaultdict
 from sys import argv
 import networkx as nx
-# import matplotlib.pyplot as plt
 
 
 grid_sz = 3
@@ -48,9 +47,6 @@ for i in range(grid_sz-1):
             G.add_edge((i, j), (i+1, j-1))
         if j != grid_sz-1:
             G.add_edge((i, j), (i+1, j+1))
-
-# nx.draw(G)
-# plt.show()
 
 
 # for i in range(grid_sz**2):

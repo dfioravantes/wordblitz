@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 from collections import deque, defaultdict
+from itertools import tee
 from sys import argv
 import networkx as nx
 
 
-grid_sz = 3
-len_alphabet = 24
+
+grid_sz = 4
 Dict = defaultdict(list)
-alphabet = iter([chr(i) for i in range(ord('Α'), ord('A') + len_alphabet)])
+alphabet = [chr(i) for i in range(913, 937)]
+it = tee(iter(alphabet), 3)
 
 Dictionary = "dict.txt"
 with open(Dictionary, 'r') as FILE:
@@ -16,24 +18,24 @@ with open(Dictionary, 'r') as FILE:
 Memorandum = "memo.txt"
 with open(Memorandum, 'r+') as MEMO:
     memo = MEMO.read().splitlines()
-    if len(memo) != len_alphabet - 2:
+    if len(alphabet) != len(memo) + 2:
         print(len(memo))
-    if argv[1] == 'y':
+    if 'u' in argv[1]:
         lines = []
-        char = next(alphabet)
+        char = next(it[0])
         for line, word in enumerate(buf):
             if char != word[0]:
                 lines.append(str(line))
-                char = next(alphabet)
+                char = next(it[0])
         memo = lines
         MEMO.seek(0)
         MEMO.writelines('\n'.join(lines))
     memo = [0] + [int(x) for x in memo] + [len(buf)]
 
-char = next(alphabet)
+char = next(it[1])
 for i in range(0, len(memo), 2):
     Dict[char] = buf[memo[i]:memo[i+1]]
-    char = next(alphabet)
+    char = next(it[1])
 
 while True:
     chars = list(input(f"Give {grid_sz**2} chars: "))

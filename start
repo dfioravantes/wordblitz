@@ -4,8 +4,6 @@ MEMO_PATH=$PWD"/memo.txt"
 flag=""
 if [ "$MEMO_PATH" -ot "$DICT_PATH" ]
 then
-	flag="y"
-else
-	flag="n"
+	flag='u'
 fi
-echo -n "`./play $flag`"
+echo -n "`./play -$flag`"

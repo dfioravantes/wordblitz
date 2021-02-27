@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+DICT_PATH=$PWD"/dict.txt"
+MEMO_PATH=$PWD"/memo.txt"
+flag=""
+if [ "$MEMO_PATH" -ot "$DICT_PATH" ]
+then
+	flag="y"
+else
+	flag="n"
+fi
+echo -n "`./play $flag`"
